@@ -26,7 +26,19 @@
     flex-grow: 13;
 }
 
+.label {
+    display: block;
+    align-self: center;
+    padding: 5px;
+    color: white;
+    text-align: center;
+    text-shadow: #000 0px 2px 12px;
+}
+
 .left {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     flex-grow: 1;
     background-color: red;
 }
@@ -34,6 +46,7 @@
 .center {
     display: flex;
     justify-content: center;
+    height: 100%;
     background-color: green;
     width: 960px;
 }
