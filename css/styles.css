@@ -11,8 +11,9 @@
 
 .header {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
     text-align: center;
     flex-grow: 1;
     background-color: pink;

@@ -1,14 +1,13 @@
 angular.module('clickerApp').service('clickerService', ['$interval', function ($interval) {
-    this.total = 100000
-    this.additive = 1;
+    this.total = 0
+    this.additive = 1
     
     this.multiplier = 1.2
     this.costMultiplier = 10
-    this.disabledMultiplier = false
-    this.backgroundColorMultiplier = 'white'
+    this.disabledMultiplier = true
+    this.backgroundColorMultiplier = 'grey'
 
     this.numAutoClickers = 0
-    
     this.costAutoClicker = 100
     this.intervals = []
     this.disabledAutoClicker = true
@@ -16,10 +15,10 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
 
     this.addToTotal = (number) => {
         this.total += number
-        if (this.total - this.costMultiplier > .00001) {
+        if (Number(this.total.toFixed(5)) >= Number(this.costMultiplier.toFixed(5))) {
             this.enableMultiplier()
         }
-        if (this.total - this.costAutoClicker > .00001)
+        if (Number(this.total.toFixed(5)) >= Number(this.costAutoClicker.toFixed(5)))
         {
             this.enableAutoClicker()
         }
@@ -53,6 +52,24 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
         this.subtractFromTotal(this.costAutoClicker)
         this.numAutoClickers++
         this.intervals.push($interval(this.addAdditive, 1000))
+    }
+
+    this.resetGame = () => {
+        this.total = 0
+
+        this.additive = 1
+
+        this.multiplier = 1.2
+        this.costMultiplier = 10
+        this.disableMultiplier()
+
+        this.numAutoClickers = 0
+        this.costAutoClicker = 100
+        this.disableAutoClicker()
+        while(this.intervals.length > 0)
+        {
+            $interval.cancel(this.intervals.pop())
+        }
     }
 
     this.enableMultiplier = () => {
