@@ -1,1 +1,1 @@
-angular.module('clickerApp', [])
+angular.module('clickerApp', ['ngCookies'])
