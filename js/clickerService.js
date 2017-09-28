@@ -1,11 +1,11 @@
 angular.module('clickerApp').service('clickerService', ['$interval', function ($interval) {
-    this.total = 0
+    this.total = 100000
     this.additive = 1;
     
     this.multiplier = 1.2
     this.costMultiplier = 10
-    this.disabledMultiplier = true
-    this.backgroundColorMultiplier = 'grey'
+    this.disabledMultiplier = false
+    this.backgroundColorMultiplier = 'white'
 
     this.numAutoClickers = 0
     
@@ -16,21 +16,22 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
 
     this.addToTotal = (number) => {
         this.total += number
-        if (Number(this.total.toFixed(5)) >= Number(this.costMultiplier.toFixed(5))) {
+        if (this.total - this.costMultiplier > .00001) {
             this.enableMultiplier()
         }
-        if (Number(this.total.toFixed(5)) >= Number(this.costAutoClicker.toFixed(5)))
+        if (this.total - this.costAutoClicker > .00001)
         {
             this.enableAutoClicker()
         }
     }
 
-    this.subtractFromTotal = (number) => {
+    this.subtractFromTotal = (number, functionToCallBeforeChecks) => {
         this.total -= number
-        if (Number(this.total.toFixed(5)) < Number(this.costMultiplier.toFixed(5))) {
+        if(functionToCallBeforeChecks) functionToCallBeforeChecks()
+        if (this.total < this.costMultiplier) {
             this.disableMultiplier()
         }
-        if (Number(this.total.toFixed(5)) < Number(this.costAutoClicker.toFixed(5)))
+        if (this.total < this.costAutoClicker)
         {
             this.disableAutoClicker()
         }
@@ -42,8 +43,10 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
 
     this.multiplyAdditive = () => {
         this.additive *= this.multiplier
-        this.subtractFromTotal(this.costMultiplier)
-        this.costMultiplier *= Math.pow(1.15, (Math.log(this.additive) / Math.log(1.2)))
+        this.subtractFromTotal(this.costMultiplier, () => {
+            this.costMultiplier *= Math.pow(1.15, (Math.log(this.additive) / Math.log(1.2)))
+        })
+        
     }
 
     this.addAutoClicker = () => {
