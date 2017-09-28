@@ -4,17 +4,15 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
 
     this.multiplier = $cookies.get("multiplier") !== undefined ? Number($cookies.get("multiplier")) : 1.2
     this.costMultiplier = $cookies.get("costMultiplier") !== undefined ? Number($cookies.get("costMultiplier")) : 10
-    this.disabledMultiplier = true
-    this.backgroundColorMultiplier = 'grey'
+    this.disabledMultiplier = this.total < this.costMultiplier ? true : false
+    this.backgroundColorMultiplier = this.total < this.costMultiplier ? 'grey' : 'white'
 
     this.numAutoClickers = $cookies.get("numAutoClicker") !== undefined ? Number($cookies.get("numAutoClicker")) : 0
     this.costAutoClicker = $cookies.get("costAutoClicker") !== undefined ? Number($cookies.get("costAutoClicker")) : 100
+    this.disabledAutoClicker = this.total < this.costAutoClicker ? true : false
+    this.backgroundColorAutoClicker = this.total < this.costAutoClicker ? 'grey' : 'white'
 
-    this.disabledAutoClicker = true
-    this.backgroundColorAutoClicker = 'grey'
-
-    this.disabledReset = true
-    this.backgroundColorReset = 'grey'
+    
 
     this.addToTotal = (number) => {
         this.total += number
@@ -128,9 +126,36 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
         }, Math.random() * 1000)
     }
 
-    $window.onbeforeunload = () => {
-        this.saveGame()
+    this.isInitialGameState = () => {
+        if (this.total !== 0) return false
+
+        if (this.additive !== 1) return false
+
+        if (this.multiplier !== 1.2) return false
+
+        if (this.costMultiplier !== 10) return false
+
+        if (this.disabledMultiplier !== true) return false
+
+        if (this.backgroundColorMultiplier !== 'grey') return false
+
+        if (this.numAutoClickers !== 0) return false
+
+        if (this.costAutoClicker !== 100) return false
+
+        if (this.disabledAutoClicker !== true) return false
+
+        if (this.backgroundColorAutoClicker !== 'grey') return false
+
+        if (this.intervals.length !== 0) return false
+
+        return true
     }
+
+    this.disabledReset = this.isInitialGameState() ? true : false
+    this.backgroundColorReset = this.isInitialGameState() ? 'grey' : 'white'
+
+    $window.onbeforeunload = this.saveGame
 
 
 
