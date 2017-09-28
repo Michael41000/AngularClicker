@@ -11,8 +11,4 @@ angular.module('clickerApp').service('addService', ['totalService', function (to
         totalService.addToTotal(this.additive)
     }
 
-    this.formatNumber = (number) => {
-        return Math.round(number * 100)/100; 
-    }
-
 }])
