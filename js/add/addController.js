@@ -2,4 +2,6 @@ angular.module('clickerApp').controller('addController', ['addService', 'totalSe
     
     this.addService = addService
 
+    
+
 }])

@@ -36,19 +36,31 @@
 }
 
 .left {
+    flex-grow: 1;
+    background-color: red;
+}
+
+.multiplyComponent {
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    flex-grow: 1;
-    background-color: red;
 }
 
 .center {
     display: flex;
     justify-content: center;
-    height: 100%;
     background-color: green;
     width: 960px;
+}
+
+.addComponent {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .button {

@@ -6,7 +6,7 @@ angular.module('clickerApp').service('totalService', ['multiplyService', functio
         this.total += number
         if (this.total >= 10)
         {
-            multiplyService.enable();
+            multiplyService.enable()
         }
     }
 
@@ -16,6 +16,10 @@ angular.module('clickerApp').service('totalService', ['multiplyService', functio
         {
             multiplyService.disable()
         }
+    }
+
+    this.checkTotal = () => {
+        return this.total
     }
 
 }])

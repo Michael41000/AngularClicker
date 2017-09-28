@@ -1,12 +1,11 @@
-angular.module('clickerApp').controller('multiplyController', ['multiplyService', 'addService', 'totalService',
-    function (multiplyService, addService, totalService) {
+angular.module('clickerApp').controller('multiplyController', ['multiplyService', 'addService', function (multiplyService, addService) {
 
         this.multiplyService = multiplyService
 
-        this.multiplyAddtive = () => {
-            totalService.subtractFromTotal(multiplyService.cost);
-            addService.multiplyAdditive(multiplyService.multiplier)
+        this.multiplyAdditive = () => {
+            addService.multiplyAdditive(this.multiplyService.multiplier, this.multiplyService.cost)
         }
+        
 
 
 

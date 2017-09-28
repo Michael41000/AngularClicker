@@ -1,4 +1,4 @@
-angular.module('clickerApp').service('multiplyService', [function () {
+angular.module('clickerApp').service('multiplyService', [function (addService) {
    
     this.multiplier = 1.2
     this.cost = 10
