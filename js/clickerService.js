@@ -1,19 +1,20 @@
 angular.module('clickerApp').service('clickerService', ['$interval', '$cookies', '$timeout', '$window', function ($interval, $cookies, $timeout, $window) {
-    this.total = $cookies.get("total") !== undefined ? Number($cookies.get("total")) : 0
-    this.additive = $cookies.get("additive") !== undefined ? Number($cookies.get("additive")) : 1
+    this.total
+    this.additive
 
-    this.multiplier = $cookies.get("multiplier") !== undefined ? Number($cookies.get("multiplier")) : 1.2
-    this.numMultipliers = $cookies.get("numMultipliers") !== undefined ? Number($cookies.get("numMultipliers")) : 0
-    this.costMultiplier = $cookies.get("costMultiplier") !== undefined ? Number($cookies.get("costMultiplier")) : 10
-    this.disabledMultiplier = this.total < this.costMultiplier ? true : false
-    this.backgroundColorMultiplier = this.total < this.costMultiplier ? 'grey' : 'white'
+    this.multiplier
+    this.numMultipliers
+    this.costMultiplier
+    this.disabledMultiplier
+    this.backgroundColorMultiplier
 
-    this.numAutoClickers = $cookies.get("numAutoClicker") !== undefined ? Number($cookies.get("numAutoClicker")) : 0
-    this.costAutoClicker = $cookies.get("costAutoClicker") !== undefined ? Number($cookies.get("costAutoClicker")) : 100
-    this.disabledAutoClicker = this.total < this.costAutoClicker ? true : false
-    this.backgroundColorAutoClicker = this.total < this.costAutoClicker ? 'grey' : 'white'
+    this.numAutoClickers
+    this.costAutoClicker
+    this.disabledAutoClicker
+    this.backgroundColorAutoClicker
 
-    
+    this.disabledReset
+    this.backgroundColorReset
 
     this.addToTotal = (number) => {
         this.total += number
@@ -43,12 +44,11 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
 
     this.multiplyAdditive = () => {
         this.additive *= this.multiplier
-        this.multiplier *= Math.pow(2, 1/7)
+        this.multiplier *= Math.pow(2, 1 / 7)
         this.numMultipliers++
         this.subtractFromTotal(this.costMultiplier, () => {
             this.costMultiplier *= Math.pow(1.15, this.numMultipliers)
         })
-
     }
 
     this.addAutoClicker = () => {
@@ -85,16 +85,6 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
         $cookies.remove("costAutoClicker")
 
         this.disableReset()
-    }
-
-    this.saveGame = () => {
-        $cookies.put("total", this.total)
-        $cookies.put("additive", this.additive)
-        $cookies.put("multiplier", this.multiplier)
-        $cookies.get("numMultipliers", this.numMultipliers)
-        $cookies.put("costMultiplier", this.costMultiplier)
-        $cookies.put("numAutoClicker", this.numAutoClickers)
-        $cookies.put("costAutoClicker", this.costAutoClicker)
     }
 
     this.enableMultiplier = () => {
@@ -159,13 +149,5 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
 
         return true
     }
-
-    this.disabledReset = this.isInitialGameState() ? true : false
-    this.backgroundColorReset = this.isInitialGameState() ? 'grey' : 'white'
-
-    $window.onbeforeunload = this.saveGame
-
-
-
 
 }])

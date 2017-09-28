@@ -1,5 +1,5 @@
-angular.module('clickerApp').controller('saveController', ['clickerService', function (clickerService) {
+angular.module('clickerApp').controller('saveController', ['saveService', function (saveService) {
 
-    this.clickerService = clickerService
+    this.saveService = saveService
 
 }])
