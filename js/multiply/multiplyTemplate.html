@@ -3,7 +3,7 @@
     <button class="button" ng-click="$ctrl.clickerService.multiplyAdditive()" 
     ng-style="{'background-color' : $ctrl.clickerService.backgroundColorMultiplier}"
     ng-disabled="$ctrl.clickerService.disabledMultiplier">
-        *{{ $ctrl.clickerService.multiplier | number: 5 }}
+        *{{ $ctrl.clickerService.multiplier | exponential }}
     </button>
-    <label class="label">Cost: {{ $ctrl.clickerService.costMultiplier | number: 5}} points</label>
+    <label class="label">Cost: {{ $ctrl.clickerService.costMultiplier | exponential}} points</label>
 </div>
