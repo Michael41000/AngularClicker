@@ -1,4 +1,4 @@
-angular.module('clickerApp').service('saveService', ['clickerService' ,'$cookies', '$window', function (clickerService, $cookies, $window) {
+angular.module('clickerApp').service('saveService', ['clickerService', '$cookies', '$window', function (clickerService, $cookies, $window) {
 
     this.saveGame = () => {
         $cookies.put("total", clickerService.total)

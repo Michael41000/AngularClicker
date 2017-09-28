@@ -1,8 +1,8 @@
 <div class="autoclickerComponent">
     <label class="label">AutoClickers: {{ $ctrl.clickerService.numAutoClickers }}</label>
     <button class="button" ng-click="$ctrl.clickerService.addAutoClicker()" 
-    ng-style="{'background-color' : $ctrl.clickerService.backgroundColorAutoClicker}"
-    ng-disabled="$ctrl.clickerService.disabledAutoClicker">
+        ng-style="{'background-color' : $ctrl.clickerService.backgroundColorAutoClicker}"
+        ng-disabled="$ctrl.clickerService.disabledAutoClicker">
         +1
     </button>
     <label class="label">Cost: {{ $ctrl.clickerService.costAutoClicker | exponential }} points</label>
