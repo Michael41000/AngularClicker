@@ -13,8 +13,12 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
     this.disabledAutoClicker = true
     this.backgroundColorAutoClicker = 'grey'
 
+    this.disabledReset = true
+    this.backgroundColorReset = 'grey'
+
     this.addToTotal = (number) => {
         this.total += number
+        this.enableReset()
         if (Number(this.total.toFixed(5)) >= Number(this.costMultiplier.toFixed(5))) {
             this.enableMultiplier()
         }
@@ -70,6 +74,10 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
         {
             $interval.cancel(this.intervals.pop())
         }
+
+        this.disableReset()
+
+
     }
 
     this.enableMultiplier = () => {
@@ -90,6 +98,16 @@ angular.module('clickerApp').service('clickerService', ['$interval', function ($
     this.disableAutoClicker = () => {
         this.disabledAutoClicker = true;
         this.backgroundColorAutoClicker = 'grey'
+    }
+
+    this.enableReset = () => {
+        this.disabledReset = false;
+        this.backgroundColorReset = 'white'
+    }
+
+    this.disableReset = () => {
+        this.disabledReset = true;
+        this.backgroundColorReset = 'grey'
     }
 
 }])
