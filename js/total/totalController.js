@@ -1,5 +1,5 @@
-angular.module('clickerApp').controller('totalController', ['totalService', function(totalService) {
+angular.module('clickerApp').controller('totalController', ['clickerService', function(clickerService) {
     
-    this.totalService = totalService
+    this.clickerService = clickerService
 
 }])

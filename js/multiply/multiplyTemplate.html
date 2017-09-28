@@ -1,8 +1,8 @@
 <div class="multiplyComponent">
-    <label class="label">Cost: {{ $ctrl.multiplyService.cost | number: 5}} points</label>
-    <button class="button" ng-click="$ctrl.multiplyAdditive()" 
-    ng-style="{'background-color' : $ctrl.multiplyService.background_color}"
-    ng-disabled="$ctrl.multiplyService.disabled">
-        *{{ $ctrl.multiplyService.multiplier }}
+    <label class="label">Cost: {{ $ctrl.clickerService.costMultiplier | number: 5}} points</label>
+    <button class="button" ng-click="$ctrl.clickerService.multiplyAdditive()" 
+    ng-style="{'background-color' : $ctrl.clickerService.backgroundColorMultiplier}"
+    ng-disabled="$ctrl.clickerService.disabledMultiplier">
+        *{{ $ctrl.clickerService.multiplier }}
     </button>
 </div>

@@ -1,6 +1,6 @@
-angular.module('clickerApp').controller('addController', ['addService', function(addService) {
+angular.module('clickerApp').controller('addController', ['clickerService', function(clickerService) {
     
-    this.addService = addService
+    this.clickerService = clickerService
 
     
 
