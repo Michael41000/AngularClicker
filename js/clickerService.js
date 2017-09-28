@@ -3,6 +3,7 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
     this.additive = $cookies.get("additive") !== undefined ? Number($cookies.get("additive")) : 1
 
     this.multiplier = $cookies.get("multiplier") !== undefined ? Number($cookies.get("multiplier")) : 1.2
+    this.numMultipliers = $cookies.get("numMultipliers") !== undefined ? Number($cookies.get("numMultipliers")) : 0
     this.costMultiplier = $cookies.get("costMultiplier") !== undefined ? Number($cookies.get("costMultiplier")) : 10
     this.disabledMultiplier = this.total < this.costMultiplier ? true : false
     this.backgroundColorMultiplier = this.total < this.costMultiplier ? 'grey' : 'white'
@@ -42,8 +43,10 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
 
     this.multiplyAdditive = () => {
         this.additive *= this.multiplier
+        this.multiplier *= Math.pow(2, 1/7)
+        this.numMultipliers++
         this.subtractFromTotal(this.costMultiplier, () => {
-            this.costMultiplier *= Math.pow(1.15, (Math.log(this.additive) / Math.log(1.2)))
+            this.costMultiplier *= Math.pow(1.15, this.numMultipliers)
         })
 
     }
@@ -73,6 +76,7 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
         $cookies.remove("total")
         $cookies.remove("additive")
         $cookies.remove("multiplier")
+        $cookies.remove("numMultipliers")
         $cookies.remove("costMultiplier")
         $cookies.remove("numAutoClicker")
         $cookies.remove("costAutoClicker")
@@ -84,6 +88,7 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
         $cookies.put("total", this.total)
         $cookies.put("additive", this.additive)
         $cookies.put("multiplier", this.multiplier)
+        $cookies.get("numMultipliers", this.numMultipliers)
         $cookies.put("costMultiplier", this.costMultiplier)
         $cookies.put("numAutoClicker", this.numAutoClickers)
         $cookies.put("costAutoClicker", this.costAutoClicker)
