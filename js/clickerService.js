@@ -52,8 +52,10 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
     }
 
     this.addAutoClicker = () => {
-        this.subtractFromTotal(this.costAutoClicker)
         this.numAutoClickers++
+        this.subtractFromTotal(this.costAutoClicker, () => {
+            this.costAutoClicker *= Math.pow(1.15, this.numAutoClickers)
+        })
         this.intervals.push($interval(this.addAdditive, 1000))
     }
 
@@ -63,6 +65,7 @@ angular.module('clickerApp').service('clickerService', ['$interval', '$cookies',
         this.additive = 1
 
         this.multiplier = 1.2
+        this.numMultipliers = 0
         this.costMultiplier = 10
         this.disableMultiplier()
 
