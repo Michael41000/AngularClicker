@@ -49,8 +49,6 @@
 }
 
 .center {
-    display: flex;
-    justify-content: center;
     background-color: green;
     width: 960px;
 }
@@ -76,6 +74,14 @@
 .right {
     flex-grow: 1;
     background-color: blue;
+}
+
+.autoclickerComponent {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .footer {

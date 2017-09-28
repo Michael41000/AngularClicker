@@ -4,11 +4,11 @@ angular.module('clickerApp').service('totalService', ['multiplyService', 'autocl
 
     this.addToTotal = (number) => {
         this.total += number
-        if (this.total >= 10)
+        if (Number(this.total.toFixed(5)) >= Number(multiplyService.cost.toFixed(5)))
         {
             multiplyService.enable()
         }
-        if (this.total >= 100)
+        if (Number(this.total.toFixed(5)) >= Number(autoclickerService.cost.toFixed(5)))
         {
             autoclickerService.enable()
         }
@@ -16,11 +16,11 @@ angular.module('clickerApp').service('totalService', ['multiplyService', 'autocl
 
     this.subtractFromTotal = (number) => {
         this.total -= number
-        if (this.total < 10)
+        if (Number(this.total.toFixed(5)) < Number(multiplyService.cost.toFixed(5)))
         {
             multiplyService.disable()
         }
-        if (this.total < 100)
+        if (Number(this.total.toFixed(5)) < Number(autoclickerService.cost.toFixed(5)))
         {
             autoclickerService.disable()
         }
